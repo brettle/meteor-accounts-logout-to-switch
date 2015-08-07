@@ -1,11 +1,11 @@
 # accounts-logout-to-switch
 ============
 
-Requires that users logout before they login to another existing account.
+Requires that non-anonymous users logout before they login to another existing account.
 
 ## Features
 
-- When a logged in user tries to login using credentials that belong to another
+- When a logged in non-anonymous user tries to login using credentials that belong to another
   existing user, the login is canceled and the user is told that they need to
   logout first. This is useful to prevent "Add Foo Service" or "Login with Foo"
   buttons from causing the user to switch accounts instead of adding a service
