@@ -11,7 +11,7 @@ AccountsMultiple.register({
 function isAnonymous(user) {
   // A user is a guest if they don't have any services other than "resume"
   return (user.services && _.size(user.services) === 1 && user.services.resume);
-};
+}
 
 function isMergeable(user) {
   // A user should be merged if they have never logged in. If they have
