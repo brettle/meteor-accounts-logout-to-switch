@@ -9,7 +9,7 @@ AccountsMultiple.register({
 });
 
 function isAnonymous(user) {
-  // A user is a guest if they don't have any services other than "resume"
+  // A user is anonymous if they don't have any services other than "resume"
   return (user.services && _.size(user.services) === 1 && user.services.resume);
 }
 
