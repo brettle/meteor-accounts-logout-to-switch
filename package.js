@@ -16,6 +16,7 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('brettle:accounts-logout-to-switch');
+  api.use('brettle:accounts-testing-support');
   api.use('brettle:accounts-anonymous');
   api.use('accounts-base', 'server');
   api.addFiles('accounts-logout-to-switch-tests.js', 'server');
