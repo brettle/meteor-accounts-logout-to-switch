@@ -1,5 +1,6 @@
-# accounts-logout-to-switch
-============
+# brettle:accounts-logout-to-switch
+
+[![Build Status](https://travis-ci.org/brettle/meteor-accounts-logout-to-switch.svg?branch=master)](https://travis-ci.org/brettle/meteor-accounts-logout-to-switch)
 
 Requires that non-anonymous users logout before they login to another existing account.
 
