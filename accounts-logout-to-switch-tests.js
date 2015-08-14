@@ -1,4 +1,6 @@
 Tinytest.add('AccountsLogoutToSwitch - logged out user logging in succeeds', function (test) {
+  AccountsMultiple._unregisterAll();
+  AccountsLogoutToSwitch._init();
   var connection = DDP.connect(Meteor.absoluteUrl());
 
   Meteor.users.remove({ 'services.test1.name': "testname" });
@@ -8,6 +10,8 @@ Tinytest.add('AccountsLogoutToSwitch - logged out user logging in succeeds', fun
 });
 
 Tinytest.add('AccountsLogoutToSwitch - non-anonymous user logging in as an new user switches', function (test) {
+  AccountsMultiple._unregisterAll();
+  AccountsLogoutToSwitch._init();
   var connection = DDP.connect(Meteor.absoluteUrl());
 
   Meteor.users.remove({ 'services.test1.name': "testname"});
@@ -23,6 +27,8 @@ Tinytest.add('AccountsLogoutToSwitch - non-anonymous user logging in as an new u
 });
 
 Tinytest.add('AccountsLogoutToSwitch -  non-anonymous user logging in as an existing user must logout first', function (test) {
+  AccountsMultiple._unregisterAll();
+  AccountsLogoutToSwitch._init();
   var connection = DDP.connect(Meteor.absoluteUrl());
 
   Meteor.users.remove({ 'services.test2.name': "test2name"});
@@ -44,6 +50,8 @@ Tinytest.add('AccountsLogoutToSwitch -  non-anonymous user logging in as an exis
 });
 
 Tinytest.add('AccountsLogoutToSwitch - anonymous user logging in as an new user switches', function (test) {
+  AccountsMultiple._unregisterAll();
+  AccountsLogoutToSwitch._init();
   var connection = DDP.connect(Meteor.absoluteUrl());
 
   var anonId = connection.call('login', { anonymous: true }).id;
@@ -58,6 +66,8 @@ Tinytest.add('AccountsLogoutToSwitch - anonymous user logging in as an new user 
 });
 
 Tinytest.add('AccountsLogoutToSwitch -  anonymous user logging in as an existing user switches', function (test) {
+  AccountsMultiple._unregisterAll();
+  AccountsLogoutToSwitch._init();
   var connection = DDP.connect(Meteor.absoluteUrl());
 
   Meteor.users.remove({ 'services.test2.name': "test2name"});

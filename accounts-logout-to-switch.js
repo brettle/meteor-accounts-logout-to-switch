@@ -1,12 +1,20 @@
+AccountsLogoutToSwitch = {};
+
 var mergeUserErrorReason = 'New login not needed. Service will be added to logged in user.';
-AccountsMultiple.register({
+var callbackSet = {
   validateSwitch: function(attemptingUser, attempt) {
     if (! isAnonymous(attemptingUser) && ! isMergeable(attempt.user)) {
       throw new Meteor.Error('user-exists-logout-first', "That user already has an account. To switch to that account, logout first.");
     }
     return true;
   },
-});
+};
+
+AccountsLogoutToSwitch._init = function () {
+  AccountsMultiple.register(callbackSet);
+};
+
+AccountsLogoutToSwitch._init();
 
 function isAnonymous(user) {
   // A user is anonymous if they don't have any services other than "resume"
