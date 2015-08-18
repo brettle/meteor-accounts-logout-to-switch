@@ -1,10 +1,13 @@
+"use strict";
+/* globals AccountsLogoutToSwitch: true, AccountsMultiple */
 AccountsLogoutToSwitch = {};
-
-var mergeUserErrorReason = 'New login not needed. Service will be added to logged in user.';
+  
 var callbackSet = {
   validateSwitch: function(attemptingUser, attempt) {
     if (! isAnonymous(attemptingUser) && ! isMergeable(attempt.user)) {
-      throw new Meteor.Error('user-exists-logout-first', "That user already has an account. To switch to that account, logout first.");
+      throw new Meteor.Error('user-exists-logout-first',
+        "That user already has an account. " +
+        "To switch to that account, logout first.");
     }
     return true;
   },
