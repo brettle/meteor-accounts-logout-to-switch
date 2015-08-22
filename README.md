@@ -8,10 +8,10 @@ account.
 ## Features
 
 - When a logged in non-anonymous user tries to login using credentials that
-  belong to another existing user, the login is canceled and the user is told
-  that they need to logout first. This is useful to prevent "Add Foo Service" or
-  "Login with Foo" buttons from causing the user to switch accounts instead of
-  adding a service to an existing account.
+- belong to another existing user, this package denies the login with an error
+- that tells the user  that they need to logout first. This is useful to prevent
+- "Add Some Service" or "Login with Some Service" buttons from causing the user
+- to switch accounts instead of adding a service to an existing account.
 
 - Works with any login service (accounts-password, acccounts-google, etc.)
 
@@ -26,4 +26,4 @@ meteor add brettle:accounts-logout-to-switch
 
 ## Usage
 
-Nothing to do. It should just work once it is installed.
+Nothing to do. It should just work once installed.
