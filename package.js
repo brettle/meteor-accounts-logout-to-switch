@@ -2,7 +2,7 @@
 
 Package.describe({
   name: 'brettle:accounts-logout-to-switch',
-  version: '0.3.1',
+  version: '0.3.2',
   summary: 'Requires that non-anonymous users logout before they login to ' +
     'another existing account.',
   git: 'https://github.com/brettle/meteor-accounts-logout-to-switch.git',

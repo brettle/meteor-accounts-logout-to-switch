@@ -57,7 +57,7 @@ Tinytest.add(
 
     test.throws(function () {
       connection.call('login', { test2: "test2name" });
-    }, 'logout first');
+    }, 'sign out first');
   }
 );
 

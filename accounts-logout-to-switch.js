@@ -1,13 +1,13 @@
 "use strict";
 /* globals AccountsLogoutToSwitch: true, AccountsMultiple */
 AccountsLogoutToSwitch = {};
-  
+
 var callbackSet = {
   validateSwitch: function(attemptingUser, attempt) {
     if (! isAnonymous(attemptingUser) && ! isMergeable(attempt.user)) {
       throw new Meteor.Error('user-exists-logout-first',
         "That user already has an account. " +
-        "To switch to that account, logout first.");
+        "To switch to that account, sign out first.");
     }
     return true;
   },
