@@ -5,6 +5,10 @@
 Requires that non-anonymous users logout before they login to another existing
 account.
 
+This package is part of the `brettle:accounts-*` suite of packages. See
+[`brettle:accounts-deluxe`](https://atmospherejs.com/brettle/accounts-deluxe)
+for an overview of the suite and a live demo.
+
 ## Features
 
 - When a logged in non-anonymous user tries to login using credentials that
