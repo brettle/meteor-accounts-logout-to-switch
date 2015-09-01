@@ -1,25 +1,54 @@
-/* globals AccountsMultiple, AccountsLogoutToSwitch */
+/* globals AccountsMultiple, AccountsLogoutToSwitch, ServiceConfiguration */
 "use strict";
+
+function addService(name) {
+  ServiceConfiguration.configurations.upsert({
+    service: name
+  }, {
+    $set: {
+      service: name
+    }
+  });
+}
+
+function removeService(name) {
+  ServiceConfiguration.configurations.remove({
+    service: name
+  });
+}
+
+function setUp() {
+  addService('test1');
+  addService('test2');
+}
+
+function tearDown() {
+  removeService('test1');
+  removeService('test2');
+}
 
 Tinytest.add(
   'AccountsLogoutToSwitch - logged out user logging in succeeds',
   function (test) {
+    setUp();
     AccountsMultiple._unregisterAll();
-    AccountsLogoutToSwitch._init();
+    new AccountsLogoutToSwitch.constructor();
     var connection = DDP.connect(Meteor.absoluteUrl());
 
     Meteor.users.remove({ 'services.test1.name': "testname" });
     var testId = connection.call('login', { test1: "testname" }).id;
     test.isNotUndefined(testId);
     test.isNotNull(testId);
+    tearDown();
   }
 );
 
 Tinytest.add(
-  'AccountsLogoutToSwitch - non-anonymous user logging in as an new user',
+  'AccountsLogoutToSwitch - signed up user logging in as an new user',
   function (test) {
+    setUp();
     AccountsMultiple._unregisterAll();
-    AccountsLogoutToSwitch._init();
+    new AccountsLogoutToSwitch.constructor();
     var connection = DDP.connect(Meteor.absoluteUrl());
 
     Meteor.users.remove({ 'services.test1.name': "testname"});
@@ -32,14 +61,16 @@ Tinytest.add(
     Meteor.users.remove({ 'services.test2.name': "test2name"});
     var newTest2Id = connection.call('login', { test2: "test2name" }).id;
     test.notEqual(newTest2Id, testId, 'not test id');
+    tearDown();
   }
 );
 
 Tinytest.add(
-  'AccountsLogoutToSwitch -  non-anonymous user logging in as an existing user',
+  'AccountsLogoutToSwitch -  signed up user logging in as an existing user',
   function (test) {
+    setUp();
     AccountsMultiple._unregisterAll();
-    AccountsLogoutToSwitch._init();
+    new AccountsLogoutToSwitch.constructor();
     var connection = DDP.connect(Meteor.absoluteUrl());
 
     Meteor.users.remove({ 'services.test2.name': "test2name"});
@@ -58,14 +89,16 @@ Tinytest.add(
     test.throws(function () {
       connection.call('login', { test2: "test2name" });
     }, 'sign out first');
+    tearDown();
   }
 );
 
 Tinytest.add(
   'AccountsLogoutToSwitch - anonymous user logging in as an new user switches',
   function (test) {
+    setUp();
     AccountsMultiple._unregisterAll();
-    AccountsLogoutToSwitch._init();
+    new AccountsLogoutToSwitch.constructor();
     var connection = DDP.connect(Meteor.absoluteUrl());
 
     var anonId = connection.call('login', { anonymous: true }).id;
@@ -77,14 +110,16 @@ Tinytest.add(
     Meteor.users.remove({ 'services.test2.name': "test2name"});
     var newTest2Id = connection.call('login', { test2: "test2name" }).id;
     test.notEqual(newTest2Id, anonId, 'not test id');
+    tearDown();
   }
 );
 
 Tinytest.add(
   'AccountsLogoutToSwitch -  anonymous user logging in as an existing user',
   function (test) {
+    setUp();
     AccountsMultiple._unregisterAll();
-    AccountsLogoutToSwitch._init();
+    new AccountsLogoutToSwitch.constructor();
     var connection = DDP.connect(Meteor.absoluteUrl());
 
     Meteor.users.remove({ 'services.test2.name': "test2name"});
@@ -100,5 +135,6 @@ Tinytest.add(
     connection.call('login', { test2: "test2name" });
     var newTest2Id = connection.call('login', { test2: "test2name" }).id;
     test.notEqual(newTest2Id, anonId, 'not test id');
+    tearDown();
   }
 );
